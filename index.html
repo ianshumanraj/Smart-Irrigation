@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Irrigation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .dropdown {
+      padding: 10px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      width: 200px;
+      border-radius: 30px;
+      border: 1px solid #ccc;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .content {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .data-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 10px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .data-card h2 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #4CAF50;
+    }
+
+    .data-card p {
+      margin: 5px 0 0;
+      font-size: 1.1em;
+      color: #555;
+    }
+
+    .manual-controls {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Smart Irrigation
+  </header>
+
+  <div class="container">
+    <label for="sensorSelect">Select Sensor Type:</label>
+    <select id="sensorSelect" class="dropdown">
+      <option value="soilMoisture">Soil Moisture</option>
+    </select>
+    <button class="button" onclick="openSensorPage()">Open Dashboard</button>
+  </div>
+
+  <div id="content" class="content"></div>
+
+  <script>
+    let wateringNeeded = 'Yes'; // Placeholder for real-time data
+
+    function openSensorPage() {
+      const sensorType = document.getElementById('sensorSelect').value;
+      const contentDiv = document.getElementById('content');
+
+      contentDiv.innerHTML = '';
+
+      if (sensorType === 'soilMoisture') {
+        // In a real application, you would fetch real-time data here.
+        // For demonstration, we'll use a placeholder.
+        wateringNeeded = Math.random() < 0.5 ? 'Yes' : 'No';
+
+        contentDiv.innerHTML = `
+          <div class="data-card">
+            <h2>Soil Moisture: 35%</h2>
+            <p>Humidity: 60%</p>
+            <p>Temperature: 22°C</p>
+            <p id="wateringStatus">Watering Status: On</p>
+            <p>Fire Detected: No</p>
+            <p>Watering Needed: ${wateringNeeded}</p>
+            <div class="manual-controls">
+              <button class="button" onclick="wateringOn()">Watering On</button>
+              <button class="button" onclick="wateringOff()">Watering Off</button>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function wateringOn() {
+      const wateringStatusElement = document.getElementById('wateringStatus');
+      wateringStatusElement.textContent = 'Watering Status: On';
+      alert('Sending command to turn on watering.');
+      console.log('Command: Turn On Watering');
+    }
+
+    function wateringOff() {
+      const wateringStatusElement = document.getElementById('wateringStatus');
+      wateringStatusElement.textContent = 'Watering Status: Off';
+      alert('Sending command to turn off watering.');
+      console.log('Command: Turn Off Watering');
+    }
+  </script>
+</body>
+</html>
